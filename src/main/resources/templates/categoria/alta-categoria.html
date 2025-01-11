@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h2 th:text="${contenido}"></h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/categoria/salvar-categoria}" method="post" th:object="${categoria}" class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text"
+                               autocomplete="off"
+                               class="form-control"
+                               id="nombre"
+                               name="nombre"
+                               placeholder="Ingrese el nombre de la categoría"
+                               th:value="*{nombre}"
+                               th:field="*{nombre}"
+                               th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="descripcion">Descripción</label>
+                        <input type="text"
+                               autocomplete="off"
+                               class="form-control"
+                               id="descripcion"
+                               name="descripcion"
+                               placeholder="Describa los artículos de esta categoría"
+                               th:value="*{descripcion}"
+                               th:field="*{descripcion}"
+                               th:classappend="${#fields.hasErrors('descripcion')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="activo">Estado</label>
+                        <select class="form-control"
+                                id="activo"
+                                th:field="*{activo}" th:classappend="${#fields.hasErrors('activo')} ? 'is-invalid':'' ">
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('activo')}" th:errors="*{activo}"></div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </div>
+                <input type="hidden" name="id" th:field="*{id}"/>
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

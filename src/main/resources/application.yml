@@ -1,0 +1,44 @@
+server:
+  port: 8099
+  error:
+    whitelabel:
+      enabled: false
+
+# Set here configurations for the database connection
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/db_sistema
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  servlet:
+    multipart:
+      max-file-size: 2MB
+      max-request-size: 2MB
+
+
+# Ruta de archivos
+ejemplo:
+  imagen:
+    ruta: "c:/imagenes/"
+
+
+# LOGGING LEVEL
+logging:
+  level:
+    root: INFO
+    com.itextpdf.styledxmlparser.css.parse.CssRuleSetParser: off
+
+# JWT
+jwt:
+  secret: 5f39c83d2d0482e07b5306f3f5a0fd8e1b4e9844987121ba4b99f3f4805fd4f85cc0f24ece8556dd10456a45d20cd2d61e7c36a77583674be979b071b869f34f
+  expirationDateInMs: 3600
+  refreshExpirationDateInMs: 900

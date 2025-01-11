@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h2 th:text="${contenido}"></h2>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/articulo/salvar-imagen}" method="post" enctype="multipart/form-data" class="mb-3">
+                <div class="form-group">
+                    <label for="imagenarchivo">Subir imagen (opcional)</label>
+                    <div class="input-group">
+                        <input type="file" class="form-control" id="imagenarchivo" name="imagenarchivo"/>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-outline-primary"><i class="bi bi-upload"></i> Subir</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <form th:action="@{/articulo/salvar-articulo}" method="post" th:object="${articulo}">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="codigo">Código</label>
+                            <input type="text"
+                                   autocomplete="off"
+                                   class="form-control"
+                                   id="codigo"
+                                   name="codigo"
+                                   placeholder="Ingrese el código del Artículo"
+                                   th:value="*{codigo}"
+                                   th:field="*{codigo}"
+                                   th:classappend="${#fields.hasErrors('codigo')} ? 'is-invalid':'' ">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="nombre">Nombre</label>
+                            <input type="text"
+                                   autocomplete="off"
+                                   class="form-control"
+                                   id="nombre" name="nombre"
+                                   placeholder="Ingrese el nombre del Artículo"
+                                   th:value="*{nombre}"
+                                   th:field="*{nombre}"
+                                   th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid':'' ">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="precioVenta">Precio de Venta</label>
+                            <input type="number"
+                                   autocomplete="off"
+                                   class="form-control"
+                                   id="precioVenta" name="precioVenta"
+                                   step="0.01" min="0"
+                                   placeholder="0.00"
+                                   th:value="*{precioVenta}"
+                                   th:field="*{precioVenta}"
+                                   th:classappend="${#fields.hasErrors('precioVenta')} ? 'is-invalid':'' ">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('precioVenta')}" th:errors="*{precioVenta}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="stock">Stock</label>
+                            <input type="number"
+                                   class="form-control"
+                                   id="stock" name="stock"
+                                   placeholder="Ingrese el stock actual"
+                                   th:value="*{stock}"
+                                   th:field="*{stock}"
+                                   th:classappend="${#fields.hasErrors('stock')} ? 'is-invalid':'' ">
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}"></div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="activo">Activo</label>
+                            <select class="form-control" id="activo" th:field="*{activo}" th:classappend="${#fields.hasErrors('activo')} ? 'is-invalid':'' ">
+                                <option value="true">Sí</option>
+                                <option value="false">No</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label for="categoria">Categoría</label>
+                            <select class="form-control" id="categoria" th:field="*{categoria}" th:classappend="${#fields.hasErrors('categoria')} ? 'is-invalid':'' ">
+                                <option th:each="cat : ${selectCategoria}" th:value="${cat.id}" th:text="${cat.nombre}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group mb-3">
+                            <label for="descripcion">Descripción</label>
+                            <textarea class="form-control"
+                                      autocomplete="off"
+                                      id="descripcion" name="descripcion"
+                                      cols="30" rows="4"
+                                      placeholder="Ingrese una descripción del Artículo"
+                                      th:value="*{descripcion}"
+                                      th:field="*{descripcion}"
+                                      th:classappend="${#fields.hasErrors('descripcion')} ? 'is-invalid':'' "></textarea>
+                            <div class="invalid-feedback" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+
+                </div>
+                <input type="hidden" name="id" th:field="*{id}"/>
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

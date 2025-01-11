@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index:: head}">
+    <title>Detalles de Ingreso</title>
+</head>
+<body>
+
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-success text-white">
+            <h1 th:text=" 'Detalles de Ingreso #' + ${ingreso.numComprobante}">Detalles de Ingreso</h1>
+        </div>
+        <div class="card-body">
+            <h3>Información General</h3>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <tbody>
+                    <tr>
+                        <th>Fecha:</th>
+                        <td th:text="${fecha}"></td>
+                    </tr>
+                    <tr>
+                        <th>Vendedor:</th>
+                        <td th:text="${ingreso.usuario}"></td>
+                    </tr>
+                    <tr>
+                        <th>Total:</th>
+                        <td th:text="${ingreso.total}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3>Artículos Ingresados</h3>
+            <table class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Artículo</th>
+                    <th scope="col">Cantidad</th>
+                    <th scope="col">Precio Unitario</th>
+                    <th scope="col">Total</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="detalle : ${detalleIngreso}">
+                    <td th:text="${detalle.articulo}"></td>
+                    <td th:text="${detalle.cantidad}"></td>
+                    <td th:text="${detalle.precio}"></td>
+                    <td th:text="${detalle.precio*detalle.cantidad}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

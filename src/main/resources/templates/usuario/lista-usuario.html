@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h2 th:text="${contenido}">Lista de Usuarios</h2>
+        </div>
+        <div class="card-body">
+            <table th:if="${!usuario.isEmpty()}" class="table table-hover table-bordered">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Id</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellidos</th>
+                    <th scope="col">CURP</th>
+                    <th scope="col">Dirección</th>
+                    <th scope="col">Teléfono</th>
+                    <th scope="col">Correo</th>
+                    <th scope="col">Activo</th>
+                    <th scope="col">Operaciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="esp : ${usuario}">
+                    <td th:text="${esp.id}"></td>
+                    <td th:text="${esp.nombre}"></td>
+                    <td th:text="${esp.apellido}"></td>
+                    <td th:text="${esp.curp}"></td>
+                    <td th:text="${esp.direccion}"></td>
+                    <td th:text="${esp.telefono}"></td>
+                    <td th:text="${esp.email}"></td>
+                    <td th:text="${esp.activo ? 'Sí' : 'No'}"></td>
+                    <td>
+                        <a th:href="@{/usuario/modificar-usuario/{id} (id=${esp.id})}" class="btn btn-success btn-sm">
+                            Modificar <i class="fa fa-edit"></i>
+                        </a>
+                        <a th:href="@{/usuario/eliminar-usuario/{id} (id=${esp.id})}" class="btn btn-danger btn-sm">
+                            Eliminar <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <nav th:replace="plantillas/pag-nav :: paginador"></nav>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

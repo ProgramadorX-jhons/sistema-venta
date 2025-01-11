@@ -1,0 +1,83 @@
+.table-hover tbody tr:hover {
+        background-color:rgb(122, 122, 122); /* Cambia esto según tus preferencias de color */
+        cursor: pointer; /* Cambia el cursor para indicar que la fila es clickeable */
+    }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+footer {
+   text-align: center;
+
+}
+.input-cantidad:disabled {
+    border-color: #f8f9fa; /* Reemplaza con el color de borde que quieras */
+}
+
+        .error-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            text-align: center;
+        }
+        .error-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+        }
+        .error-card h1 {
+            font-size: 24px;
+            color: #de4d4d;
+            margin-bottom: 20px;
+        }
+        .error-card p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            color: #fff;
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .dashboard-card {
+          border-radius: 10px;
+          color: white;
+          padding: 20px;
+          margin: 10px;
+          display: inline-block;
+          width: 200px;
+        }
+
+        .card-1 { background: linear-gradient(to right, #8e2de2, #4a00e0); }
+        .card-2 { background: linear-gradient(to right, #ff758c, #ff7eb3); }
+        .card-3 { background: linear-gradient(to right, #ff9966, #ff5e62); }
+        .card-4 { background: linear-gradient(to right, #00f260, #0575e6); }
+
+        .dashboard-card i { /* Estilos de iconos si son necesarios */ }
+        .dashboard-card .card-title { font-size: 18px; margin-bottom: 10px; }
+        .dashboard-card .card-value { font-size: 24px; font-weight: bold; }
+        .dashboard-card .card-detail { font-size: 12px; }

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}">
+    <!-- Asegúrate de que Bootstrap está correctamente incluido -->
+</head>
+<body>
+<header th:replace="~{index :: header}"></header>
+
+<main class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-4">
+            <img th:src="@{'/imagenes/' + ${articulo.imagen}}" alt="Imagen del Artículo" class="img-fluid rounded" onerror="this.src='/imagenes/Sin_imagen_disponible.jpg';"/>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-info text-white">Detalles del Articulo</div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Nombre:</strong> <span  th:text="${articulo.nombre}"></span></p>
+                    <p class="card-text"><strong>Código:</strong> <span th:text="${articulo.codigo}"></span></p>
+                    <p class="card-text"><strong>Precio de Venta:</strong> <span th:text="${articulo.precioVenta}"></span></p>
+                    <p class="card-text"><strong>Stock:</strong> <span th:text="${articulo.stock}"></span></p>
+                    <p class="card-text"><strong>Descripción:</strong> <span th:text="${articulo.descripcion}"></span></p>
+                    <p class="card-text"><strong>Categoría:</strong> <span th:text="${articulo.categoria.nombre}"></span></p>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

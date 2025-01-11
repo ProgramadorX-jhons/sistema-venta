@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Error</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container text-center mt-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h1 class="card-title text-danger">Algo salió mal</h1>
+            <p class="card-text">Lo sentimos, ha ocurrido un error inesperado.</p>
+            <p class="card-text">El recurso que buscas no está disponible o ha ocurrido un error interno. Por favor, intenta nuevamente o regresa más tarde.</p>
+            <hr>
+            <p class="card-text">
+                <strong>Fecha y hora del error:</strong> <span th:text="${timestamp}">Fecha y hora del error</span><br>
+                <strong>Estado del error:</strong> <span th:text="${status}">Estado del error</span><br>
+                <strong>Mensaje del error:</strong> <span th:text="${error}">Mensaje del error</span><br>
+                <strong>Descripción del error:</strong> <span th:text="${message}">Descripción del error</span><br>
+                <strong>Ruta:</strong> <span th:text="${path}">Ruta</span>
+            </p>
+            <a href="/" class="btn btn-primary">Volver al Inicio</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

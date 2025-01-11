@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h2 th:text="${contenido}">Lista de Personas</h2>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table th:if="${!persona.isEmpty()}" class="table table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Tipo de Persona</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Teléfono</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Activo</th>
+                        <th sec:authorize="hasAuthority('ADMIN')" scope="col">Operaciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="esp : ${persona}">
+                        <td th:text="${esp.id}"></td>
+                        <td th:text="${esp.tipoPersona}"></td>
+                        <td th:text="${esp.nombre}"></td>
+                        <td th:text="${esp.direccion}"></td>
+                        <td th:text="${esp.telefono}"></td>
+                        <td th:text="${esp.email}"></td>
+                        <td th:text="${esp.activo ? 'Sí' : 'No'}"></td>
+                        <td sec:authorize="hasAuthority('ADMIN')">
+                            <a th:href="@{/persona/modificar-persona/{id} (id=${esp.id})}" class="btn btn-success btn-sm">
+                                Modificar <i class="fa fa-edit"></i>
+                            </a>
+                            <a th:href="@{/persona/eliminar-persona/{id} (id=${esp.id})}" class="btn btn-danger btn-sm">
+                                Eliminar <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <nav th:replace="plantillas/pag-nav :: paginador"></nav>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index:: header}"></header>
+<main class="container mt-5">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary text-white">
+            <h3 class="card-title">Alta de Persona</h3>
+        </div>
+        <div class="card-body">
+            <form th:action="@{/persona/salvar-persona}" method="post" th:object="${persona}" class="needs-validation" novalidate>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="tipoPersona">Tipo de Persona</label>
+                        <select class="form-control"
+                                id="tipoPersona"
+                                name="tipoPersona"
+                                th:field="*{tipoPersona}"
+                                th:classappend="${#fields.hasErrors('tipoPersona')} ? 'is-invalid':'' ">
+                            <option value="">Elija una opción</option>
+                            <option th:value="Cliente">Cliente</option>
+                            <option th:value="Proveedor">Proveedor</option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('tipoPersona')}" th:errors="*{tipoPersona}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="nombre">Nombre</label>
+                        <input type="text"
+                               autocomplete="off"
+                               class="form-control"
+                               id="nombre" name="nombre"
+                               placeholder="Ingrese el nombre de la persona"
+                               th:field="*{nombre}"
+                               th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="direccion">Dirección</label>
+                        <input type="text"
+                               autocomplete="off"
+                               class="form-control"
+                               id="direccion" name="direccion"
+                               placeholder="Ingrese la dirección de la persona"
+                               th:field="*{direccion}"
+                               th:classappend="${#fields.hasErrors('direccion')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="telefono">Teléfono</label>
+                        <input type="tel"
+                               autocomplete="off"
+                               class="form-control"
+                               id="telefono" name="telefono"
+                               placeholder="5555555555"
+                               th:field="*{telefono}"
+                               th:classappend="${#fields.hasErrors('telefono')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email"
+                               class="form-control"
+                               id="correo" name="correo"
+                               placeholder="demo@demo.dgtic"
+                               th:field="*{email}"
+                               th:classappend="${#fields.hasErrors('email')} ? 'is-invalid':'' ">
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="activo">Activo</label>
+                        <select class="form-control"
+                                id="activo" name="activo"
+                                th:field="*{activo}"
+                                th:classappend="${#fields.hasErrors('activo')} ? 'is-invalid':'' ">
+                            <option value="true">Activo</option>
+                            <option value="false">Inactivo</option>
+                        </select>
+                        <div class="invalid-feedback" th:if="${#fields.hasErrors('activo')}" th:errors="*{activo}"></div>
+                    </div>
+
+                    <div class="col-12 text-center">
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                </div>
+                <input type="hidden" name="id" th:field="*{id}"/>
+            </form>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

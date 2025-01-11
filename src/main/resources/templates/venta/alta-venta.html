@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-primary  text-white">
+            <h2 th:text="${contenido}"></h2>
+        </div>
+        <div class="card-body">
+            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : 'info')" th:if="${mensaje != null}" th:text="${mensaje}" class="alert"></div>
+            <form th:object="${articulo}" th:action="@{/venta/agregar}" method="post" class="mb-4">
+                <div class="form-group">
+                    <label for="codigo">Código de barras</label>
+                    <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Escanea el código o escríbelo y presiona Enter" th:field="*{codigo}" autofocus autocomplete="off">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('codigo')}" th:errors="*{codigo}"></div>
+                </div>
+            </form>
+
+            <form th:action="@{/venta/terminar}" method="post" class="mb-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="persona">Cliente</label>
+                            <select class="form-control" id="persona" name="persona">
+                                <option th:each="sel : ${personas}" th:value="${sel.id}" th:text="${sel.nombre}"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="estado">Estado de la venta</label>
+                            <select class="form-control" id="estado" name="estado">
+                                <option value="Aceptado">Aceptado</option>
+                                <option value="Inaceptado">Inaceptado</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-3">
+                    <button type="submit" class="btn btn-success">Terminar Venta <i class="fa fa-check"></i></button>
+                    <a th:href="@{/venta/limpiar}" class="btn btn-danger">Cancelar Venta <i class="fa fa-trash"></i></a>
+                </div>
+            </form>
+
+            <h3 th:text="${'Total: ' + total}">Total: $0.00</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead class="thead-light">
+                    <tr>
+                        <th>Código</th>
+                        <th>Nombre</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Total</th>
+                        <th>Acción</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="articulo, iterador : ${session.carrito}">
+                        <td th:text="${articulo.codigo}"></td>
+                        <td th:text="${articulo.nombre}"></td>
+                        <td th:text="${articulo.precioVenta}"></td>
+                        <td th:text="${articulo.cantidad}"></td>
+                        <td th:text="${articulo.total}"></td>
+                        <td>
+                            <form th:action="@{/venta/quitar/} + ${iterador.index}" method="post">
+                                <button type="submit" class="btn btn-danger"><i class="fa fa-trash"></i> Quitar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+</body>
+</html>

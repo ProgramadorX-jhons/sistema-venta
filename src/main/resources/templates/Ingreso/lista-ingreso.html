@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{index :: head}"></head>
+<body>
+<header th:replace="~{index :: header}"></header>
+<main class="container mt-4">
+    <div class="card shadow-lg">
+        <div class="card-header bg-info text-white">
+            <h2 th:text="${contenido}"></h2>
+        </div>
+        <div class="card-body">
+            <div th:classappend="'alert-' + (${clase != null} ? ${clase} : 'info')" th:if="${mensaje != null}" th:text="${mensaje}" class="alert"></div>
+            <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success mb-3" th:href="@{/ingreso/alta-ingreso}">Agregar Nuevo Ingreso</a>
+            <div class="table-responsive">
+                <table class="table table-hover table-bordered">
+                    <thead class="thead-dark">
+                    <tr>
+                        <th>Fecha</th>
+                        <th>Usuario</th>
+                        <th>Número de Comprobante</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="ingreso : ${ingreso}" th:data-id="${ingreso.id}" class="clickable-row">
+                        <td th:text="${ingreso.fecha}"></td>
+                        <td th:text="${ingreso.usuario}"></td>
+                        <td th:text="${ingreso.numComprobante}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <nav th:replace="plantillas/pag-nav :: paginador"></nav>
+        </div>
+    </div>
+</main>
+<footer th:replace="~{index :: footer}"></footer>
+<script>
+    document.querySelectorAll('.clickable-row').forEach(row => {
+        row.addEventListener('dblclick', () => {
+            const ingresoId = row.getAttribute('data-id');
+            window.location.href = `/ingreso/detalle-ingreso/${ingresoId}`; // Ajusta la URL según tus rutas
+        });
+    });
+</script>
+</body>
+</html>
